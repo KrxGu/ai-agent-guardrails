@@ -1,0 +1,29 @@
+{
+  "name": "mcp-server-demo",
+  "version": "0.0.1",
+  "description": "Demo MCP server with read/write/admin tools for guardrails testing",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "mcp-server-demo": "./dist/server.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "start": "node dist/server.js",
+    "dev": "tsup --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "model-context-protocol", "demo"],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.27.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}

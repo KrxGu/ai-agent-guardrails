@@ -1,0 +1,23 @@
+{
+  "name": "ai-agent-guardrails-workspace",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Agent Guardrails for AI SDK + MCP - Monorepo",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "clean": "pnpm -r exec rm -rf dist",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "lint": "eslint ."
+  },
+  "keywords": ["ai", "sdk", "guardrails", "mcp", "security"],
+  "author": "Krish Gupta",
+  "license": "MIT",
+  "packageManager": "pnpm@10.27.0",
+  "devDependencies": {
+    "eslint": "^9.39.2",
+    "prettier": "^3.7.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}

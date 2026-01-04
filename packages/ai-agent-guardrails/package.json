@@ -1,0 +1,55 @@
+{
+  "name": "ai-agent-guardrails",
+  "version": "0.0.1",
+  "description": "Production-grade tool firewall for AI SDK agents with approval gates, budgets, and audit logging",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "sdk",
+    "guardrails",
+    "mcp",
+    "security",
+    "middleware",
+    "agents",
+    "vercel",
+    "ai-sdk",
+    "tool-calling",
+    "approval",
+    "audit",
+    "redaction"
+  ],
+  "author": "Krish Gupta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KrxGu/ai-agent-guardrails.git",
+    "directory": "packages/ai-agent-guardrails"
+  },
+  "homepage": "https://github.com/KrxGu/ai-agent-guardrails#readme",
+  "bugs": {
+    "url": "https://github.com/KrxGu/ai-agent-guardrails/issues"
+  },
+  "packageManager": "pnpm@10.27.0",
+  "dependencies": {
+    "ai": "^6.0.6",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
