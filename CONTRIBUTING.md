@@ -222,7 +222,7 @@ Follows semantic versioning (semver):
 
 Do not open public issues for security vulnerabilities.
 
-Email: security@example.com
+Email: krishom70@gmail.com
 
 Include:
 - Vulnerability description
