@@ -26,6 +26,19 @@ export async function POST(req: Request) {
 
     console.log('[chat route] Received messages:', messages.length);
 
+    // Transform messages to ensure they have content property
+    const transformedMessages = messages.map((msg: any) => {
+      if (msg.role === 'user' && msg.parts) {
+        // Extract text content from parts array
+        const textContent = msg.parts
+          .filter((p: any) => p.type === 'text')
+          .map((p: any) => p.text)
+          .join('');
+        return { role: 'user', content: textContent };
+      }
+      return msg;
+    });
+
     // Get MCP client and tools
     const mcp = await getMcpClient();
     const mcpTools = await mcp.tools();
@@ -37,7 +50,7 @@ export async function POST(req: Request) {
     console.log('[chat route] Guard context created:', ctx.requestId);
 
     // Wrap tools with guardrails
-    const tools = guardTools(mcpTools, {
+    const tools = guardTools(mcpTools as any, {
       policy,
       ctx,
       audit: new ConsoleAuditSink(),
@@ -47,9 +60,8 @@ export async function POST(req: Request) {
     // Stream text response with guarded tools
     const result = streamText({
       model: openai('gpt-4o-mini'),
-      messages,
+      messages: transformedMessages,
       tools: tools as any, // Type assertion to handle AI SDK version differences
-      maxSteps: 5, // Limit agent loop steps
     });
 
     // Return as UI message stream for useChat

@@ -6,9 +6,7 @@ import { useChat } from '@ai-sdk/react';
 export default function Home() {
   const [input, setInput] = useState('');
   
-  const { messages, sendMessage, status, addToolResult } = useChat({
-    api: '/api/chat',
-  });
+  const { messages, sendMessage, status, addToolResult } = useChat();
 
   const isLoading = status === 'streaming' || status === 'submitted';
 
@@ -41,7 +39,7 @@ export default function Home() {
     console.log('[handleApprove] Providing result:', result);
     
     try {
-      await addToolResult({ toolCallId, result });
+      await addToolResult({ toolCallId, tool: toolName, output: result });
       console.log('[handleApprove] Result added successfully');
     } catch (err) {
       console.error('[handleApprove] Error adding result:', err);
@@ -53,8 +51,9 @@ export default function Home() {
     
     try {
       await addToolResult({ 
-        toolCallId, 
-        result: { 
+        toolCallId,
+        tool: toolName, 
+        output: { 
           success: false, 
           error: 'Tool execution denied by user',
           message: `User denied execution of ${toolName}`
@@ -72,7 +71,7 @@ export default function Home() {
     
     const message = input;
     setInput('');
-    await sendMessage({ content: message });
+    await sendMessage({ role: 'user', parts: [{ type: 'text', text: message }] } as any);
   };
 
   return (
