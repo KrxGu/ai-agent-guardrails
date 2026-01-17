@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agent Guardrails Demo
 
-## Getting Started
+Next.js application demonstrating secure AI agent deployment with policy enforcement and approval gates.
 
-First, run the development server:
+## Features
+
+- Policy-based tool control (allowlist/denylist/approval)
+- Human-in-the-loop approval flow
+- Budget enforcement (call limits, timeouts)
+- Audit logging to console
+- MCP tool integration
+
+## Setup
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add OpenAI API key:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+echo "OPENAI_API_KEY=sk-your-key" > .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Test Prompts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Safe (no approval):**
+```
+Search docs for AI SDK
+```
 
-## Deploy on Vercel
+**Requires approval:**
+```
+Create an issue in vercel/next.js titled "Test"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Blocked:**
+```
+Delete resource abc123
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Implementation
+
+Key files:
+- [app/api/chat/route.ts](app/api/chat/route.ts) - Guardrails configuration
+- [app/page.tsx](app/page.tsx) - Approval UI
+- [app/api/chat/mcpClient.ts](app/api/chat/mcpClient.ts) - MCP client
+
+Uses published npm package: `ai-agent-guardrails@0.0.1`
+
+## Deploy
+
+Deploy to Vercel:
+
+```bash
+vercel --prod
+```
+
+Add OPENAI_API_KEY environment variable in Vercel dashboard.

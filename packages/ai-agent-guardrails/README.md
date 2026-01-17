@@ -146,9 +146,9 @@ const tools = guardTools(myTools, { policy, redactor });
 
 ## Documentation
 
-- [Full Documentation](https://github.com/yourusername/agent-guardrails-mcp)
-- [Threat Model](https://github.com/yourusername/agent-guardrails-mcp/blob/main/docs/THREAT_MODEL.md)
-- [Demo App](https://agent-guardrails-demo.vercel.app)
+- [Full Documentation](https://github.com/KrxGu/ai-agent-guardrails)
+- [Threat Model](https://github.com/KrxGu/ai-agent-guardrails/blob/main/docs/THREAT_MODEL.md)
+- [Demo App](https://ai-agent-guardrails-o5udcrdq2-match-my-career.vercel.app)
 
 ## License
 

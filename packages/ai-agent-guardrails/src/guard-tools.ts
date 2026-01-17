@@ -38,10 +38,8 @@ export function guardTools<T extends Record<string, ToolLike>>(
           const { risk, reason } = await opts.policy.classify(toolName, input);
           const decision = await opts.policy.decide({ toolName, input, ctx, risk, reason });
 
-          // Return true if decision requires approval
           return Boolean((decision as any).needsApproval);
         } catch (error) {
-          console.error(`[guardTools] Error in needsApproval check for ${toolName}:`, error);
           // Fail closed: require approval on error
           return true;
         }

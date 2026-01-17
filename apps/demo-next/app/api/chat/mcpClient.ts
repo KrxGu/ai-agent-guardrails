@@ -12,7 +12,6 @@ declare global {
  */
 export async function getMcpClient() {
   if (!globalThis.__mcpClientPromise) {
-    // Path to the built MCP server
     const serverPath = path.resolve(
       process.cwd(),
       '..',
@@ -22,8 +21,6 @@ export async function getMcpClient() {
       'dist',
       'server.js'
     );
-
-    console.log('[mcpClient] Connecting to MCP server at:', serverPath);
 
     globalThis.__mcpClientPromise = createMCPClient({
       transport: new Experimental_StdioMCPTransport({

@@ -24,12 +24,8 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
 
-    console.log('[chat route] Received messages:', messages.length);
-
-    // Transform messages to ensure they have content property
     const transformedMessages = messages.map((msg: any) => {
       if (msg.role === 'user' && msg.parts) {
-        // Extract text content from parts array
         const textContent = msg.parts
           .filter((p: any) => p.type === 'text')
           .map((p: any) => p.text)
@@ -39,35 +35,27 @@ export async function POST(req: Request) {
       return msg;
     });
 
-    // Get MCP client and tools
     const mcp = await getMcpClient();
     const mcpTools = await mcp.tools();
 
-    console.log('[chat route] Available MCP tools:', Object.keys(mcpTools));
-
-    // Create a guard context for this request
     const ctx = createDefaultContext();
-    console.log('[chat route] Guard context created:', ctx.requestId);
 
-    // Wrap tools with guardrails
     const tools = guardTools(mcpTools as any, {
       policy,
       ctx,
       audit: new ConsoleAuditSink(),
-      timeoutMs: 10_000, // 10 second timeout per tool
+      timeoutMs: 10_000,
     });
 
-    // Stream text response with guarded tools
     const result = streamText({
       model: openai('gpt-4o-mini'),
       messages: transformedMessages,
-      tools: tools as any, // Type assertion to handle AI SDK version differences
+      tools: tools as any,
     });
 
-    // Return as UI message stream for useChat
     return result.toUIMessageStreamResponse();
   } catch (error: any) {
-    console.error('[chat route] Error:', error);
+    console.error('Chat error:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

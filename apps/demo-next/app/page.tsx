@@ -12,9 +12,6 @@ export default function Home() {
 
   // Handle tool approval - execute the tool and provide result
   const handleApprove = async (toolCallId: string, toolName: string, args: any) => {
-    console.log('[handleApprove] Approving tool:', toolName, 'id:', toolCallId, 'args:', args);
-    
-    // Simulate tool execution result based on tool name
     let result: any;
     switch (toolName) {
       case 'create_issue':
@@ -36,13 +33,10 @@ export default function Home() {
         result = { success: true, message: `Tool ${toolName} executed successfully` };
     }
     
-    console.log('[handleApprove] Providing result:', result);
-    
     try {
       await addToolResult({ toolCallId, tool: toolName, output: result });
-      console.log('[handleApprove] Result added successfully');
     } catch (err) {
-      console.error('[handleApprove] Error adding result:', err);
+      console.error('Error adding tool result:', err);
     }
   };
 
@@ -93,25 +87,25 @@ export default function Home() {
                   className="block w-full max-w-md mx-auto text-left px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-colors"
                   onClick={() => setInput('Search docs for AI SDK')}
                 >
-                  🔍 Search docs for AI SDK
+                  Search docs for AI SDK
                 </button>
                 <button 
                   className="block w-full max-w-md mx-auto text-left px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-colors"
                   onClick={() => setInput("Create an issue in vercel/next.js titled 'Test guardrails'")}
                 >
-                  📝 Create an issue in vercel/next.js
+                  Create an issue in vercel/next.js
                 </button>
                 <button 
                   className="block w-full max-w-md mx-auto text-left px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-colors"
                   onClick={() => setInput('Send an email to test@example.com')}
                 >
-                  ✉️ Send an email to test@example.com
+                  Send an email to test@example.com
                 </button>
                 <button 
                   className="block w-full max-w-md mx-auto text-left px-4 py-3 rounded-lg bg-neutral-900 border border-red-900/50 hover:border-red-600 transition-colors text-red-400"
                   onClick={() => setInput('Delete resource abc123')}
                 >
-                  🚫 Delete resource abc123 <span className="text-red-500 text-xs">(blocked)</span>
+                  Delete resource abc123 <span className="text-red-500 text-xs">(blocked)</span>
                 </button>
               </div>
             </div>

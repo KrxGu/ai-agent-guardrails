@@ -222,7 +222,7 @@ Follows semantic versioning (semver):
 
 Do not open public issues for security vulnerabilities.
 
-Email: krishom70@gmail.com
+Report via GitHub Security Advisories: https://github.com/KrxGu/ai-agent-guardrails/security/advisories/new
 
 Include:
 - Vulnerability description
