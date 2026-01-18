@@ -41,6 +41,9 @@
   "bugs": {
     "url": "https://github.com/KrxGu/ai-agent-guardrails/issues"
   },
+  "publishConfig": {
+    "@krxgu:registry": "https://npm.pkg.github.com"
+  },
   "packageManager": "pnpm@10.27.0",
   "dependencies": {
     "ai": "^6.0.6",
